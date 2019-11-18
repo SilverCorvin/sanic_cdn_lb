@@ -28,14 +28,12 @@ def get_key(cdn_host, payload):
 
 
 async def get_from_cache(app, payload, cdn_host):
-    with await app.redis as redis:
-        key = get_key(cdn_host, payload)
-        return await redis.get(key)
+    key = get_key(cdn_host, payload)
+    return await app.redis.get(key)
 
 
 async def store_in_cache(app, payload, cdn_host):
-    with await app.redis as redis:
-        addr = prepare_cdn_addr(payload, cdn_host)
-        key = get_key(cdn_host, payload)
-        await redis.set(key, addr)
-        return addr
+    addr = prepare_cdn_addr(payload, cdn_host)
+    key = get_key(cdn_host, payload)
+    await app.redis.set(key, addr)
+    return addr
