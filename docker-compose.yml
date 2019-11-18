@@ -1,0 +1,18 @@
+version: "2.4"
+services:
+  redis:
+    image: redis:5.0.6-alpine
+    expose:
+      - "6379"
+
+  webapp:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - ./app.env
+    command: run_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
