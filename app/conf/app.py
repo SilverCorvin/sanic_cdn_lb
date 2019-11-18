@@ -6,6 +6,7 @@ CDN_B_ADDR = os.getenv('CDN_B_ADDR')
 CDN_A_WEIGHT = int(os.getenv('CDN_A_WEIGHT', '10'))
 CDN_B_WEIGHT = int(os.getenv('CDN_B_WEIGHT', '20'))
 ORIGIN_WEIGHT = int(os.getenv('ORIGIN_WEIGHT', '1'))
+USE_CACHE = bool(os.getenv('USE_CACHE', 1))
 
 # Redis settings
 REDIS_HOST = os.getenv('REDIS_HOST', '127.0.0.1')

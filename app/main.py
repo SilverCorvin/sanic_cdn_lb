@@ -3,7 +3,7 @@ from sanic.response import json, redirect
 from sanic_redis_ext import RedisExtension
 
 from conf import app as app_conf
-from helpers import get_cdn_host, get_from_cache, store_in_cache
+from helpers import get_cdn_host, get_from_cache, prepare_cdn_addr, store_in_cache
 
 
 app = Sanic()
@@ -23,6 +23,9 @@ async def handle(request):
     cdn_host = get_cdn_host(request.app)
     if not cdn_host:
         return redirect(resource)
+
+    if not request.app.config.USE_CACHE:
+        return redirect(prepare_cdn_addr(resource, cdn_host))
 
     cached_value = await get_from_cache(request.app, resource, cdn_host)
     if cached_value:

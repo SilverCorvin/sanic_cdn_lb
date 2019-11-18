@@ -7,6 +7,7 @@ You can configure this application by modifying app.env file:
     CDN_A_WEIGHT - specify weight for the first cdn
     CDN_B_WEIGHT - specify weight for the second cdn
     ORIGIN_WEIGHT - specify weight for an origin
+    USE_CACHE - 0|1 if used(by default) prepared redirect addr will be received form cache backend
 
 ## Run
 To run this app:
